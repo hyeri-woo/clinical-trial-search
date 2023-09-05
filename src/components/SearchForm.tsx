@@ -1,11 +1,16 @@
+import React from 'react';
 import { styled } from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
 
-export default function SearchForm() {
+type SearchFormProps = {
+  changeKeyword: React.ChangeEventHandler<HTMLInputElement>;
+};
+
+export default function SearchForm({ changeKeyword }: SearchFormProps) {
   return (
     <StyledForm>
       <label>
-        <input type='text' name='d' autoFocus />
+        <input type='text' name='d' autoFocus onChange={changeKeyword} />
         <FaSearch size='24' color='white' />
       </label>
       <button type='submit'>검색</button>

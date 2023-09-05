@@ -1,19 +1,20 @@
-import React from 'react';
 import { Disease } from '../types';
 import SelectItem from './SelectItem';
 import { styled } from 'styled-components';
 
+const SEARCH_LIMIT = 10;
+
 type SelectListProps = {
-  diseaseList: Disease[];
+  diseases: Disease[];
 };
 
-export default function SelectList({ diseaseList }: SelectListProps) {
+export default function SelectList({ diseases }: SelectListProps) {
   return (
     <StyledList>
       <li>
         <span>추천 검색어</span>
       </li>
-      {diseaseList.map((disease) => {
+      {diseases.slice(0, SEARCH_LIMIT).map((disease) => {
         return (
           <li key={disease.sickCd}>
             <SelectItem>{disease.sickNm}</SelectItem>

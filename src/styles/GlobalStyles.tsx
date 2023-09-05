@@ -7,7 +7,7 @@ const GlobalStyle = createGlobalStyle`
         box-sizing: border-box;
         color: white;
     }
-    html, body, #root {
+    html {
         background: rgb(106,221,190);
         background: linear-gradient(130deg, rgba(106,221,190,1) 0%, rgba(83,140,247,1) 81%, rgba(52,95,233,1) 100%);
         height: 100%;

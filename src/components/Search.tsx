@@ -30,4 +30,5 @@ const StyledLayout = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  margin-top: 150px;
 `;

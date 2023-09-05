@@ -1,7 +1,14 @@
+import { Outlet } from 'react-router-dom';
 import './App.css';
+import GlobalStyle from './styles/GlobalStyles';
 
 function App() {
-  return <div className='App'></div>;
+  return (
+    <>
+      <GlobalStyle />
+      <Outlet />
+    </>
+  );
 }
 
 export default App;

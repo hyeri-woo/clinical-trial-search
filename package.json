@@ -54,12 +54,13 @@
     "eslint-config-prettier": "^9.0.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "react-icons": "^4.10.1"
   },
   "lint-staged": {
     "renderer/**/*.{js,ts,jsx,tsx}": [
       "eslint --ext .tsx,.ts . --quiet --fix",
-      "prettier --config ./.prettierrc.json --write -u"
+      "prettier --config ./.prettierrc.js --write -u"
     ]
   }
 }

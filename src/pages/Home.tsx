@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getKeyword } from '../api/search';
+import { getSearchResult } from '../api/search';
 import { Disease } from '../types';
 import SearchForm from '../components/SearchForm';
 import SelectList from '../components/SelectList';
@@ -11,10 +11,12 @@ export default function Home() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getKeyword(keyword);
+      const res = await getSearchResult(keyword);
       setDiseases(res);
     };
-    fetchData();
+    if (keyword !== '') {
+      fetchData();
+    }
   }, [keyword]);
 
   const changeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {

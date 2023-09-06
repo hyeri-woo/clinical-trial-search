@@ -38,6 +38,7 @@ const StyledForm = styled.form`
     background: var(--color-white30);
     font-size: 15px;
     padding: 30px 130px 30px 55px;
+    box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
   }
   button {
     width: 20%;

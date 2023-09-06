@@ -37,6 +37,7 @@ const StyledList = styled.ul`
   border-radius: 50px;
   padding: 30px;
   border: 1px solid white;
+  box-shadow: 0px 0px 6px 0px rgba(0, 0, 0, 0.25);
   li:nth-child(2) {
     margin-top: 10px;
   }

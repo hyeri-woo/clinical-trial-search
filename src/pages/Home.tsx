@@ -31,7 +31,7 @@ export default function Home() {
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기{' '}
       </h1>
       <SearchForm changeKeyword={changeKeyword} />
-      <SelectList isKeywordTyped={keyword !== ''} diseases={diseases} />
+      <SelectList isKeywordTyped={debouncedKeyword !== ''} diseases={diseases} />
       {}
     </StyledLayout>
   );

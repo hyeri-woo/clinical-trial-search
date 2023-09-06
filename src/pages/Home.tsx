@@ -16,7 +16,7 @@ export default function Home() {
       const res = await getSearchResult(debouncedKeyword);
       setDiseases(res);
     };
-    if (keyword !== '') {
+    if (debouncedKeyword !== '') {
       fetchData();
     }
   }, [debouncedKeyword]);

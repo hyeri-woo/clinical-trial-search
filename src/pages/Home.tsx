@@ -4,20 +4,22 @@ import { Disease } from '../types';
 import SearchForm from '../components/SearchForm';
 import SelectList from '../components/SelectList';
 import { styled } from 'styled-components';
+import useDebounce from '../hooks/useDebounce';
 
 export default function Home() {
   const [diseases, setDiseases] = useState<Disease[]>(() => []);
   const [keyword, setKeyword] = useState<string>('');
+  const debouncedKeyword = useDebounce({ value: keyword, delay: 500 });
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await getSearchResult(keyword);
+      const res = await getSearchResult(debouncedKeyword);
       setDiseases(res);
     };
     if (keyword !== '') {
       fetchData();
     }
-  }, [keyword]);
+  }, [debouncedKeyword]);
 
   const changeKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(e.target.value);

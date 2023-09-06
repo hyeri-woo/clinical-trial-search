@@ -1,6 +1,7 @@
 import App from '../App';
 import Home from '../pages/Home';
 import { createBrowserRouter } from 'react-router-dom';
+import NotFound from '../pages/NotFound';
 
 export const router = createBrowserRouter([
   {
@@ -12,5 +13,6 @@ export const router = createBrowserRouter([
         element: <Home />,
       },
     ],
+    errorElement: <NotFound />,
   },
 ]);

@@ -7,8 +7,11 @@ type SearchFormProps = {
 };
 
 export default function SearchForm({ changeKeyword }: SearchFormProps) {
+  const searchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+  };
   return (
-    <StyledForm>
+    <StyledForm onSubmit={searchSubmit}>
       <label>
         <input type='text' name='d' autoFocus onChange={changeKeyword} />
         <FaSearch size='24' color='white' />

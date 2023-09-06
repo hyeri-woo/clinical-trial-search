@@ -28,7 +28,8 @@ export default function Home() {
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기{' '}
       </h1>
       <SearchForm changeKeyword={changeKeyword} />
-      {diseases.length > 0 && keyword !== '' && <SelectList diseases={diseases} />}
+      <SelectList isKeywordTyped={keyword !== ''} diseases={diseases} />
+      {}
     </StyledLayout>
   );
 }

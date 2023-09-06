@@ -5,22 +5,27 @@ import { styled } from 'styled-components';
 const SEARCH_LIMIT = 10;
 
 type SelectListProps = {
+  isKeywordTyped: boolean;
   diseases: Disease[];
 };
 
-export default function SelectList({ diseases }: SelectListProps) {
+export default function SelectList({ isKeywordTyped, diseases }: SelectListProps) {
   return (
     <StyledList>
       <li>
-        <span>추천 검색어</span>
+        {!isKeywordTyped && '검색어 없음'}
+        {isKeywordTyped && diseases.length === 0 && '추천 검색어 없음'}
+        {isKeywordTyped && diseases.length > 0 && '추천 검색어'}
       </li>
-      {diseases.slice(0, SEARCH_LIMIT).map((disease) => {
-        return (
-          <li key={disease.sickCd}>
-            <SelectItem>{disease.sickNm}</SelectItem>
-          </li>
-        );
-      })}
+      {isKeywordTyped &&
+        diseases.length > 0 &&
+        diseases.slice(0, SEARCH_LIMIT).map((disease) => {
+          return (
+            <li key={disease.sickCd}>
+              <SelectItem>{disease.sickNm}</SelectItem>
+            </li>
+          );
+        })}
     </StyledList>
   );
 }
@@ -30,7 +35,7 @@ const StyledList = styled.ul`
   border-radius: 50px;
   padding: 30px;
   border: 1px solid white;
-  li:nth-child(1) {
-    margin-bottom: 10px;
+  li:nth-child(2) {
+    margin-top: 10px;
   }
 `;

@@ -27,7 +27,7 @@
     "postinstall": "husky install",
     "format": "prettier --cache --write .",
     "lint": "eslint --cache .",
-    "server": "json-server --watch db.json --port 4000",
+    "server": "json-server --watch src/data/db.json --port 4000",
     "prepare": "husky install"
   },
   "eslintConfig": {

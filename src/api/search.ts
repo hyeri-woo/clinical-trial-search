@@ -17,10 +17,12 @@ export const getSearchResult = async (keyword: string) => {
   const sStorage = new SessionStorage();
   const result = sStorage.get(keyword);
   if (result) {
+    console.log('calling session storage');
     return result;
   } else {
     const response = await getKeyword(keyword);
     sStorage.save(keyword, response.slice(0, 10));
+    console.log('calling api');
     return response;
   }
 };

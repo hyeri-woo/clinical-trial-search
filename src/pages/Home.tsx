@@ -21,7 +21,6 @@ export default function Home() {
     setKeyword(e.target.value);
   };
 
-  console.log(diseases);
   return (
     <StyledLayout>
       <h1>

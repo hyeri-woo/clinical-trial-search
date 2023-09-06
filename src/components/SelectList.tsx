@@ -1,6 +1,7 @@
 import { Disease } from '../types';
 import SelectItem from './SelectItem';
 import { styled } from 'styled-components';
+import React, { useState } from 'react';
 
 const SEARCH_LIMIT = 10;
 
@@ -10,8 +11,22 @@ type SelectListProps = {
 };
 
 export default function SelectList({ isKeywordTyped, diseases }: SelectListProps) {
+  const [current, setCurrent] = useState<number>(0);
+  const ArrowKeyDown = (e: React.KeyboardEvent) => {
+    const length = diseases.length < 10 ? diseases.length : 10;
+    if (e.key === 'ArrowUp' && current > 0) {
+      setCurrent((prev) => prev - 1);
+    }
+    if (e.key === 'ArrowDown' && current < length - 1) {
+      setCurrent((prev) => prev + 1);
+    }
+    const buttons = (e.target as HTMLElement).closest('ul')?.querySelectorAll('button');
+    if (buttons) {
+      buttons[current].focus();
+    }
+  };
   return (
-    <StyledList>
+    <StyledList onKeyDown={ArrowKeyDown} tabIndex={0}>
       <li>
         {!isKeywordTyped && '검색어 없음'}
         {isKeywordTyped && diseases.length === 0 && '추천 검색어 없음'}

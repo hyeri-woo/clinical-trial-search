@@ -1,12 +1,10 @@
 import React from 'react';
 import { styled } from 'styled-components';
 import { FaSearch } from 'react-icons/fa';
+import { useSearch } from '../context/SearchContext';
 
-type SearchFormProps = {
-  changeKeyword: React.ChangeEventHandler<HTMLInputElement>;
-};
-
-export default function SearchForm({ changeKeyword }: SearchFormProps) {
+export default function SearchForm() {
+  const { changeKeyword } = useSearch();
   const searchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

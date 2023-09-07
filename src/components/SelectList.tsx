@@ -1,25 +1,22 @@
-import { Sick } from '../types';
 import SelectItem from './SelectItem';
 import { styled } from 'styled-components';
 import useArrowKeyDown from '../hooks/useArrowKeyDown';
+import { useSearch } from '../context/SearchContext';
 
 const SEARCH_LIMIT = 10;
 
-type SelectListProps = {
-  isKeywordTyped: boolean;
-  suggestions: Sick[];
-};
-
-export default function SelectList({ isKeywordTyped, suggestions }: SelectListProps) {
+export default function SelectList() {
+  const { suggestions, keyword } = useSearch();
+  const isKeywordEmpty = keyword === '';
   const ArrowKeyDown = useArrowKeyDown({ suggestions });
   return (
     <StyledList onKeyDown={ArrowKeyDown} tabIndex={0}>
       <li>
-        {!isKeywordTyped && '검색어 없음'}
-        {isKeywordTyped && suggestions.length === 0 && '추천 검색어 없음'}
-        {isKeywordTyped && suggestions.length > 0 && '추천 검색어'}
+        {isKeywordEmpty && '검색어 없음'}
+        {!isKeywordEmpty && suggestions.length === 0 && '추천 검색어 없음'}
+        {!isKeywordEmpty && suggestions.length > 0 && '추천 검색어'}
       </li>
-      {isKeywordTyped &&
+      {!isKeywordEmpty &&
         suggestions.length > 0 &&
         suggestions.slice(0, SEARCH_LIMIT).map((suggestion) => {
           return (

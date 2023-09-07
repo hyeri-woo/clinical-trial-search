@@ -1,12 +1,12 @@
-import { Disease } from '../types';
+import { Sick } from '../types';
 
 export default class SessionStorage {
   private EXP = 10; // MIN
 
-  save(keyword: string, diseases: Disease[]) {
+  save(keyword: string, suggestions: Sick[]) {
     const now = new Date();
     const item = {
-      value: diseases,
+      value: suggestions,
       expiry: now.getTime() + this.EXP * 60 * 1000,
     };
     sessionStorage.setItem(keyword, JSON.stringify(item));

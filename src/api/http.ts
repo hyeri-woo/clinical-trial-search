@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 
-export default class http {
+export default class Http {
   private axiosInstance: AxiosInstance;
   constructor(BASE_URL: string) {
     this.axiosInstance = axios.create({

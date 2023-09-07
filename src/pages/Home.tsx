@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { getSearchResult } from '../api/search';
-import { Disease } from '../types';
+import { Sick } from '../types';
 import SearchForm from '../components/SearchForm';
 import SelectList from '../components/SelectList';
 import { styled } from 'styled-components';
 import useDebounce from '../hooks/useDebounce';
 
 export default function Home() {
-  const [diseases, setDiseases] = useState<Disease[]>(() => []);
+  const [suggestions, setsuggestions] = useState<Sick[]>(() => []);
   const [keyword, setKeyword] = useState<string>('');
   const debouncedKeyword = useDebounce({ value: keyword, delay: 500 });
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await getSearchResult(debouncedKeyword);
-      setDiseases(res);
+      setsuggestions(res);
     };
     if (debouncedKeyword !== '') {
       fetchData();
@@ -31,7 +31,7 @@ export default function Home() {
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기{' '}
       </h1>
       <SearchForm changeKeyword={changeKeyword} />
-      <SelectList isKeywordTyped={debouncedKeyword !== ''} diseases={diseases} />
+      <SelectList isKeywordTyped={debouncedKeyword !== ''} suggestions={suggestions} />
       {}
     </StyledLayout>
   );

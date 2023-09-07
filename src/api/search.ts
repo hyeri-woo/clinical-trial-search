@@ -1,12 +1,12 @@
 import Http from './http';
-import { Disease } from '../types';
+import { Sick } from '../types';
 import SessionStorage from '../storage/sessionStorage';
 const BASE_URL = 'http://localhost:4000';
 
 const http = new Http(BASE_URL);
 
 const getKeyword = async (keyword: string) => {
-  return await http.get<Disease[]>('/sick', {
+  return await http.get<Sick[]>('/sick', {
     params: {
       q: keyword,
     },

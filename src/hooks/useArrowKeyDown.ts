@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Disease } from '../types';
+import { Sick } from '../types';
 
 interface arrowKeyDownProps {
-  diseases: Disease[];
+  suggestions: Sick[];
 }
 
-export default function useArrowKeyDown({ diseases }: arrowKeyDownProps) {
+export default function useArrowKeyDown({ suggestions }: arrowKeyDownProps) {
   const [current, setCurrent] = useState<number>(0);
   const ArrowKeyDown = (e: React.KeyboardEvent) => {
-    const length = diseases.length < 10 ? diseases.length : 10;
+    const length = suggestions.length < 10 ? suggestions.length : 10;
     if (e.key === 'ArrowUp' && current > 0) {
       setCurrent((prev) => prev - 1);
     }

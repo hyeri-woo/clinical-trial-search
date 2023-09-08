@@ -72,20 +72,22 @@ export default function SearchProvider({ children }: SearchProviderProps) {
     const suggestionBtn = document.querySelectorAll('.list-suggestion button');
     // eslint-disable-next-line react-hooks/exhaustive-deps
     console.log(selectIndex);
-    if (event.key === 'ArrowDown') {
-      event.preventDefault();
-      setSelectIndex((prev) => {
-        const idx = prev < suggestions.length - 1 ? prev + 1 : 0;
-        (suggestionBtn[idx] as HTMLButtonElement).focus();
-        return idx;
-      });
-    } else if (event.key === 'ArrowUp') {
-      event.preventDefault();
-      setSelectIndex((prev) => {
-        const idx = prev > 0 ? prev - 1 : suggestions.length - 1;
-        (suggestionBtn[idx] as HTMLButtonElement).focus();
-        return idx;
-      });
+    if (event.nativeEvent.isComposing === false) {
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setSelectIndex((prev) => {
+          const idx = prev < suggestions.length - 1 ? prev + 1 : 0;
+          (suggestionBtn[idx] as HTMLButtonElement).focus();
+          return idx;
+        });
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setSelectIndex((prev) => {
+          const idx = prev > 0 ? prev - 1 : suggestions.length - 1;
+          (suggestionBtn[idx] as HTMLButtonElement).focus();
+          return idx;
+        });
+      }
     }
   };
 

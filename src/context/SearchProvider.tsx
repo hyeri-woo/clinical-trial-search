@@ -70,8 +70,7 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   const keyboardEvent = (event: React.KeyboardEvent<HTMLInputElement | HTMLUListElement>) => {
     if (suggestions.length === 0) return;
     const suggestionBtn = document.querySelectorAll('.list-suggestion button');
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    console.log(selectIndex);
+    if (selectIndex < -1) return;
     if (event.nativeEvent.isComposing === false) {
       if (event.key === 'ArrowDown') {
         event.preventDefault();

@@ -20,18 +20,15 @@ export default class CacheStorage {
       const cachedResponse = await cache.match(this.baseURL + endPoint);
       if (!cachedResponse) {
         await this.save(endPoint, response);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         console.log('calling from api');
         return response.clone();
       }
       const date = new Date(cachedResponse.headers.get('Date') || Date.now());
       if (Date.now() > date.getTime() + this.EXPIRE_TIME) {
         await this.save(endPoint, response);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
         console.log('calling from api');
         return response.clone();
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
       console.log('calling from cache');
       return cachedResponse;
     } catch (error) {

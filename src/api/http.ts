@@ -1,17 +1,19 @@
-import axios, { AxiosInstance } from 'axios';
+import CacheStorage from '../storage/cacheStorage';
 
 export default class Http {
-  private axiosInstance: AxiosInstance;
-  constructor(BASE_URL: string) {
-    this.axiosInstance = axios.create({
-      baseURL: BASE_URL,
-    });
+  private baseURL: string;
+  private cacheStorage: CacheStorage;
+
+  constructor(baseURL: string, cacheStorageName: string) {
+    this.baseURL = baseURL;
+    this.cacheStorage = new CacheStorage(baseURL, cacheStorageName);
   }
 
-  public async get<T>(endPoint: string, params: object): Promise<T> {
+  public async get<T>(endPoint: string, keyword: string): Promise<T> {
     try {
-      const response = await this.axiosInstance.get<T>(endPoint, params);
-      return response.data;
+      const response = await fetch(`${this.baseURL}${endPoint}?q=${keyword}`);
+      const cached = await this.cacheStorage.get(`${endPoint}?q=${keyword}`, response);
+      return cached.json();
     } catch (error) {
       console.error('error', error);
       throw error;

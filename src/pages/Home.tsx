@@ -1,15 +1,19 @@
 import SearchForm from '../components/SearchForm';
 import SelectList from '../components/SelectList';
 import { styled } from 'styled-components';
+import { useSearch } from '../context/SearchContext';
 
 export default function Home() {
+  const { isFocus, changeFocus, changeBlur } = useSearch();
   return (
     <StyledLayout>
       <h1>
         국내 모든 임상시험 검색하고 <br /> 온라인으로 참여하기{' '}
       </h1>
-      <SearchForm />
-      <SelectList />
+      <main tabIndex={0} onFocus={changeFocus} onBlur={changeBlur}>
+        <SearchForm />
+        {isFocus && <SelectList />}
+      </main>
       {}
     </StyledLayout>
   );
@@ -25,5 +29,8 @@ const StyledLayout = styled.div`
   h1 {
     text-align: center;
     margin-bottom: 15px;
+  }
+  main form {
+    margin-bottom: 10px;
   }
 `;

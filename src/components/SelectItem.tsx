@@ -18,8 +18,17 @@ export default function SelectItem({ children }: SelectItemProps) {
     }
   };
 
+  const keyDownEvent = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Enter') {
+      const keyword = (event.target as HTMLElement).textContent;
+      if (keyword) {
+        setKeywordManual(keyword);
+      }
+    }
+  };
+
   return (
-    <StyledItem type='button' onMouseDown={changeInputValue}>
+    <StyledItem type='button' onMouseDown={changeInputValue} onKeyDown={keyDownEvent}>
       <FaSearch size='12' color='white' />
       <span>{children}</span>
     </StyledItem>
@@ -39,7 +48,10 @@ const StyledItem = styled.button`
   svg {
     margin-right: 10px;
   }
-  &:hover {
+  &:hover,
+  &:focus {
     background: var(--color-white20);
+    outline: none;
+    box-shadow: none;
   }
 `;

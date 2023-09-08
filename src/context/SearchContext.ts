@@ -13,7 +13,7 @@ export interface SearchContextType {
   changeBlur: (event: React.FocusEvent<HTMLElement>) => void;
   changeKeyword: (event: React.ChangeEvent<HTMLInputElement>) => void;
   setKeywordManual: (keyword: string) => void;
-  keyboardEvent: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  keyboardEvent: (event: React.KeyboardEvent<HTMLInputElement | HTMLUListElement>) => void;
 }
 
 const SearchContext = createContext<SearchContextType | undefined>(undefined);

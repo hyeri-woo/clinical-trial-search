@@ -1,22 +1,19 @@
 import SelectItem from './SelectItem';
 import { styled } from 'styled-components';
-import useArrowKeyDown from '../hooks/useArrowKeyDown';
 import { useSearch } from '../context/SearchContext';
 import RecentSearchList from './RecentSearchList';
 
 const SEARCH_LIMIT = 10;
 
 export default function SelectList() {
-  const { suggestions } = useSearch();
+  const { suggestions, keyboardEvent } = useSearch();
 
-  // const isKeywordEmpty = keyword === '';
-  const ArrowKeyDown = useArrowKeyDown({ suggestions });
   return (
     <StyledDiv>
       <RecentSearchList />
-      <StyledSection onKeyDown={ArrowKeyDown}>
+      <StyledSection>
         <h2>추천 검색어</h2>
-        <ul>
+        <ul className='list-suggestion' onKeyDown={keyboardEvent}>
           {suggestions.length === 0
             ? '없음'
             : suggestions.slice(0, SEARCH_LIMIT).map((suggestion) => {

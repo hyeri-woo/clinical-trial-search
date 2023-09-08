@@ -1,5 +1,5 @@
 export default class SessionStorage {
-  private EXPIRE_TIME = 10 * 60 * 1000; // 10MIN
+  private EXPIRE_TIME = 60 * 60 * 1000; // 60MIN
 
   save(key: string, value: any) {
     const now = new Date();

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import SearchContext, { SearchContextType } from './SearchContext';
 import { getSearchResult } from '../api/search';
 import useDebounce from '../hooks/useDebounce';
@@ -32,7 +32,14 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   useEffect(() => {
     const keyword = getRecentKeyword();
     setRecentKeyword(keyword);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (!isFocus) {
+      setSelectIndex(-1);
+    }
+  }, [isFocus, keyword]);
 
   const changeKeyword = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value;
@@ -60,27 +67,31 @@ export default function SearchProvider({ children }: SearchProviderProps) {
     setSuggestions([]);
   };
 
-  const keyboardEvent = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
+  const keyboardEvent = (event: React.KeyboardEvent<HTMLInputElement | HTMLUListElement>) => {
+    console.log(suggestions);
+    console.log(keyword);
     if (suggestions.length === 0) return;
-    if (event.key === 'ArrowDown' || event.key === 'Tab') {
+    const suggestionBtn = document.querySelectorAll('.list-suggestion button');
+    if (event.key === 'ArrowDown') {
+      console.log(event.key, selectIndex);
       event.preventDefault();
       setSelectIndex((prev) => {
         const idx = prev < suggestions.length - 1 ? prev + 1 : 0;
-        setKeyword(suggestions[idx].sickNm);
+        (suggestionBtn[idx] as HTMLButtonElement).focus();
+        console.log(idx);
         return idx;
       });
     } else if (event.key === 'ArrowUp') {
+      console.log(event.key, selectIndex);
       event.preventDefault();
       setSelectIndex((prev) => {
-        const idx = prev < suggestions.length - 1 ? prev + 1 : suggestions.length - 1;
-        setKeyword(suggestions[idx].sickNm);
+        const idx = prev > 0 ? prev - 1 : suggestions.length - 1;
+        (suggestionBtn[idx] as HTMLButtonElement).focus();
+        console.log(idx);
         return idx;
       });
-    } else if (event.key === 'Enter') {
-      selectIndex !== -1 && setSuggestions((prev) => [prev[selectIndex]]);
-      setSelectIndex(-1);
     }
-  }, []);
+  };
 
   const getRecentKeyword = () => {
     const recentKeyword = sessionStorage.get(SESSION_RECENT_KEYWORD);

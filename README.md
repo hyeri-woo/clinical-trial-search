@@ -195,7 +195,3 @@ export default function useDebounce({ value, delay }: debounceProps) {
 - input을 submit 하면 최근 검색어 sessionStorage에 저장
 - 겹치지 않게 가장 최근 5개의 검색어만 보여줌
 - 1시간의 만료시간이 있음
-
-#### 사용법
-
-검색한 후

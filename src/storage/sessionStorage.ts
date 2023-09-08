@@ -1,31 +1,29 @@
-import { Sick } from '../types';
-
 export default class SessionStorage {
-  private EXP = 10; // MIN
+  private EXPIRE_TIME = 10 * 60 * 1000; // 10MIN
 
-  save(keyword: string, suggestions: Sick[]) {
+  save(key: string, value: any) {
     const now = new Date();
     const item = {
-      value: suggestions,
-      expiry: now.getTime() + this.EXP * 60 * 1000,
+      value: value,
+      expiry: now.getTime() + this.EXPIRE_TIME,
     };
-    sessionStorage.setItem(keyword, JSON.stringify(item));
+    sessionStorage.setItem(key, JSON.stringify(item));
   }
 
-  get(keyword: string) {
-    const item = JSON.parse(sessionStorage.getItem(keyword) || '{}');
+  get(key: string) {
+    const item = JSON.parse(sessionStorage.getItem(key) || '{}');
     const now = new Date();
     if (Object.keys(item).length === 0) {
       return null;
     }
     if (now.getTime() > item.expiry) {
-      this.remove(keyword);
+      this.remove(key);
       return null;
     }
     return item.value;
   }
 
-  remove(keyword: string) {
-    sessionStorage.removeItem(keyword);
+  remove(key: string) {
+    sessionStorage.removeItem(key);
   }
 }

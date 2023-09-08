@@ -7,7 +7,6 @@
 
 <a href="clinical-trial-search.netlify.app">Clinical Trial Search 배포 링크</a>
 
-
 ## 사용 라이브러리
 
 - 언어: TypeScript
@@ -135,7 +134,6 @@ export default class Http {
 - cacheStorage class에서 save, get, remove 메서드 정의 (storage/cacheStorage.ts)
 - cacheStorage에서 가져온 item의 headers['Data']를 현재 시간과 비교해 만료시간을 넘으면 remove을 불러와 cacheStorage에서 삭제
 
-
 ### 3. API 호출 횟수 줄이기
 
 > - 입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행
@@ -165,7 +163,6 @@ export default function useDebounce({ value, delay }: debounceProps) {
 
 - SearchProvider에서 keyboardEvent 정의
 
-
 ```js
   const keyboardEvent = (event: React.KeyboardEvent<HTMLInputElement | HTMLUListElement>) => {
     if(suggestions.length === 0) return;
@@ -184,15 +181,17 @@ export default function useDebounce({ value, delay }: debounceProps) {
         (suggestionBtn[idx] as HTMLButtonElement).focus();
         return idx;
       });
-    } 
+    }
   };
 ```
+
 - input에서 ArrowDown 누를시 첫번째 추천 검색어로 이동
 - SelectList 안에서 화살표로 순회하면서 이동 가능
 - SearchItem에서 따로 keydownEvent 정의
-  - 포커스된 item에서 Enter 누를시 input 값이 바뀜 
+  - 포커스된 item에서 Enter 누를시 input 값이 바뀜
 
 ### 5. 최근 검색어
+
 - input을 submit 하면 최근 검색어 sessionStorage에 저장
 - 겹치지 않게 가장 최근 5개의 검색어만 보여줌
 - 1시간의 만료시간이 있음

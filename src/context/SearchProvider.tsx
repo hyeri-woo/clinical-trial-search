@@ -68,26 +68,22 @@ export default function SearchProvider({ children }: SearchProviderProps) {
   };
 
   const keyboardEvent = (event: React.KeyboardEvent<HTMLInputElement | HTMLUListElement>) => {
-    console.log(suggestions);
-    console.log(keyword);
     if (suggestions.length === 0) return;
     const suggestionBtn = document.querySelectorAll('.list-suggestion button');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    console.log(selectIndex);
     if (event.key === 'ArrowDown') {
-      console.log(event.key, selectIndex);
       event.preventDefault();
       setSelectIndex((prev) => {
         const idx = prev < suggestions.length - 1 ? prev + 1 : 0;
         (suggestionBtn[idx] as HTMLButtonElement).focus();
-        console.log(idx);
         return idx;
       });
     } else if (event.key === 'ArrowUp') {
-      console.log(event.key, selectIndex);
       event.preventDefault();
       setSelectIndex((prev) => {
         const idx = prev > 0 ? prev - 1 : suggestions.length - 1;
         (suggestionBtn[idx] as HTMLButtonElement).focus();
-        console.log(idx);
         return idx;
       });
     }
